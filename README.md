@@ -1,7 +1,7 @@
 # 🧩 PostIframe
 
 **PostIframe** is a lightweight JavaScript utility that simplifies working with iframes.  
-Load dynamic content using `src` or `srcdoc`, communicate via `postMessage`, and update iframes on the fly — all with just a few lines of code.
+Load dynamic content using `src` or `srcdoc`, automatically send a `postMessage` to the iframe after it loads, and refresh iframe content on the fly — all with just a few lines of code.
 
 ---
 
@@ -9,10 +9,9 @@ Load dynamic content using `src` or `srcdoc`, communicate via `postMessage`, and
 
 - Load iframe via `src` or `srcdoc`
 - Secure sandboxing support
-- Automatically send `postMessage` to iframe after load
-- Receive messages from iframe in the parent
-- Manual `.update()` method to refresh iframe content
-- Prevents duplicate instances on the same iframe element
+- Automatically send a `postMessage` to the iframe after load
+- Prevent duplicate instances on the same iframe element
+- Easily refresh the iframe content by creating a new instance
 
 ---
 
@@ -62,37 +61,21 @@ Include the script directly in your HTML:
 
 ---
 
-## 🔄 Updating an Existing Frame
+## 🔄 Refreshing an Existing Frame
 
-### Automatically (using same selector/element):
+Since PostIframe prevents duplicate instances on the same element, simply create a new instance with the same selector or element to refresh the iframe content:
 
 ```js
+// Initially load the iframe
 new PostIframe({
   selector: '#my-frame',
   src: 'https://old-url.com'
 });
 
-// Later...
+// Later, refresh the iframe with a new URL by creating a new instance
 new PostIframe({
   selector: '#my-frame',
   src: 'https://new-url.com'
-});
-```
-
-### Manually (using `.update()`):
-
-```js
-const instance = new PostIframe({
-  selector: '#my-frame',
-  src: 'https://initial.com'
-});
-
-instance.update({
-  src: 'https://updated.com',
-  postMessageMessage: { type: 'update', value: 'new content' },
-  onLoaded: function(frame) {
-    console.log('Updated content loaded!');
-  }
 });
 ```
 
@@ -115,8 +98,6 @@ new PostIframe({
 ## 🧠 Inside the Iframe (`child.html`)
 
 You can handle communication in multiple ways:
-
----
 
 ### ✅ 1. Receiving message from parent
 
@@ -179,26 +160,26 @@ window.addEventListener('message', function(event) {
 
 ## ⚙️ Options Reference
 
-| Option                     | Type         | Default                                                                 | Description |
-|----------------------------|--------------|-------------------------------------------------------------------------|-------------|
-| `element`                  | `HTMLElement`| `undefined`                                                              | The target iframe element. Required if `selector` is not used. |
-| `selector`                 | `string`     | `undefined`                                                              | CSS selector to find the iframe. Alternative to `element`. |
-| `src`                      | `string`     | `undefined`                                                              | URL to load in the iframe. Required if `srcdoc` is not provided. |
-| `srcdoc`                   | `string`     | `''` (empty string)                                                      | Inline HTML to embed directly into the iframe. |
-| `sandbox`                  | `string`     | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. |
-| `onLoaded`                 | `function`   | `null`                                                                   | Callback triggered after the iframe is loaded. |
-| `postMessageMessage`       | `object`     | `{ type: 'referrer', referrer: window.location.origin + window.location.pathname }` | Message object sent to iframe after load. |
-| `postMessageTargetOrigin`  | `string`     | `window.location.origin`                                                | Target origin for `postMessage`. |
+| Option                    | Type          | Default                                                                 | Description |
+|---------------------------|---------------|-------------------------------------------------------------------------|-------------|
+| `element`                 | `HTMLElement` | `undefined`                                                             | The target iframe element. Required if `selector` is not used. |
+| `selector`                | `string`      | `undefined`                                                             | CSS selector to find the iframe. Alternative to `element`. |
+| `src`                     | `string`      | `undefined`                                                             | URL to load in the iframe. Required if `srcdoc` is not provided. |
+| `srcdoc`                  | `string`      | `''` (empty string)                                                     | Inline HTML to embed directly into the iframe. |
+| `sandbox`                 | `string`      | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. |
+| `onLoaded`                | `function`    | `null`                                                                  | Callback triggered after the iframe is loaded. |
+| `postMessageMessage`      | `object`      | `{ type: 'referrer', referrer: window.location.origin + window.location.pathname }` | Message object sent to the iframe after load. |
+| `postMessageTargetOrigin` | `string`      | `window.location.origin`                                                | Target origin for `postMessage`. |
 
 ---
 
 ## 🧠 How It Works
 
 1. Initialize an iframe with either `src` or `srcdoc`.
-2. When loaded, PostIframe optionally sends a `postMessage`.
-3. Inside the iframe, you can listen for this message and reply back.
-4. You can send messages manually via `window.parent.postMessage(...)`.
-5. Easily update the iframe content with `.update()`.
+2. When the iframe loads, PostIframe automatically sends a `postMessage` to it.
+3. Inside the iframe, you can listen for this message and respond accordingly.
+4. To refresh the iframe content, simply create a new PostIframe instance targeting the same element.
+5. Duplicate instances on the same element are prevented by design.
 
 ---
 

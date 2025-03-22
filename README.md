@@ -179,16 +179,16 @@ window.addEventListener('message', function(event) {
 
 ## ⚙️ Options Reference
 
-| Option                    | Type         | Description |
-|---------------------------|--------------|-------------|
-| `element`                 | `HTMLElement`| The iframe element to target (required if no `selector`) |
-| `selector`                | `string`     | CSS selector to find the iframe |
-| `src`                     | `string`     | URL to load into iframe |
-| `srcdoc`                  | `string`     | Raw HTML string to inject as iframe content |
-| `sandbox`                 | `string`     | Sandbox attributes (default: `allow-forms allow-scripts allow-same-origin`) |
-| `onLoaded`                | `function`   | Callback fired after iframe loads |
-| `postMessageMessage`      | `object`     | Data sent via `postMessage` after iframe load |
-| `postMessageTargetOrigin`| `string`     | Target origin for postMessage (default: current origin) |
+| Option                     | Type         | Default                                                                 | Description |
+|----------------------------|--------------|-------------------------------------------------------------------------|-------------|
+| `element`                  | `HTMLElement`| `undefined`                                                              | The target iframe element. Required if `selector` is not used. |
+| `selector`                 | `string`     | `undefined`                                                              | CSS selector to find the iframe. Alternative to `element`. |
+| `src`                      | `string`     | `undefined`                                                              | URL to load in the iframe. Required if `srcdoc` is not provided. |
+| `srcdoc`                   | `string`     | `''` (empty string)                                                      | Inline HTML to embed directly into the iframe. |
+| `sandbox`                  | `string`     | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. |
+| `onLoaded`                 | `function`   | `null`                                                                   | Callback triggered after the iframe is loaded. |
+| `postMessageMessage`       | `object`     | `{ type: 'referrer', referrer: window.location.origin + window.location.pathname }` | Message object sent to iframe after load. |
+| `postMessageTargetOrigin`  | `string`     | `window.location.origin`                                                | Target origin for `postMessage`. |
 
 ---
 

@@ -21,7 +21,7 @@ Load dynamic content using `src` or `srcdoc`, communicate via `postMessage`, and
 Include the script directly in your HTML:
 
 ```html
-<script src="post-iframe.js"></script>
+<script src="post-iframe.min.js"></script>
 ```
 
 ---

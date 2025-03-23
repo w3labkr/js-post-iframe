@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Membership</title>
+    <link rel="stylesheet" href="./assets/vendor/bootstrap-5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/all-signup.css">
+</head>
+<body>
+<div id="page" class="site">
+    <header id="masthead" class="site-header"></header>
+    <div id="content" class="content">
+        <main id="primary" class="main">
+            <article class="hentry">
+                <div class="entry-header">
+                    <div class="container">
+                        <h1 class="entry-title">Integrated Membership</h1>
+                        <p class="entry-description" style="white-space: pre-line;">Cras vitae ipsum euismod, ullamcorper est at, placerat nibh. Aliquam vitae orci in felis pretium molestie ullamcorper eget ipsum.
+
+                            Vivamus ut porttitor diam. Vestibulum eu nisi sodales, mollis est in, aliquet est. Fusce sapien orci, faucibus in facilisis eget, dignissim faucibus lacus. Nulla facilisi. 
+                            
+                            Phasellus a dolor magna. Nulla imperdiet mauris purus, eu fermentum turpis efficitur et. Donec quis rutrum mi. 
+                        </p>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="container">
+                        <div class="card-wrapper">
+                            <div class="card">
+                                <div class="card-header">
+                                    <nav id="step-nav" class="step-nav row row-cols-4 g-0">
+                                        <div class="step-nav-item step-1 col text-center text-md-start active">
+                                            <small class="d-inline">Step1</small><br>
+                                            <span class="d-none d-md-inline">Start</span>
+                                        </div>
+                                        <div class="step-nav-item step-2 col text-center text-md-start">
+                                            <small class="d-inline">Step2</small><br>
+                                            <span class="d-none d-md-inline">Site1 Sign Up</span>
+                                        </div>
+                                        <div class="step-nav-item step-3 col text-center text-md-start">
+                                            <small class="d-inline">Step3</small><br>
+                                            <span class="d-none d-md-inline">Site2 Sign Up</span>
+                                        </div>
+                                        <div class="step-nav-item step-4 col text-center text-md-start">
+                                            <small class="d-inline">Step4</small><br>
+                                            <span class="d-none d-md-inline">Complete</span>
+                                        </div>
+                                    </nav>
+                                </div>
+                                <div class="card-body step-1">
+                                    <iframe id="post-iframe" frameborder="0" width="100%" height="100%" style="display: block;" 
+                                        sandbox="allow-forms allow-scripts allow-same-origin" 
+                                        srcdoc="<!DOCTYPE html>
+                                    <html lang='en'>
+                                        <head>
+                                            <meta charset='UTF-8'>
+                                            <link rel='stylesheet' href='./assets/vendor/bootstrap-5.2.3/css/bootstrap.min.css'>
+                                        </head>
+                                        <body>
+                                            <div class='d-flex flex-column justify-content-center align-items-center vh-100 text-center'>
+                                                <h2>🚀 Step 1. Getting Started</h2>
+                                                <p>Welcome to the service!<br>
+                                                From now on, you can sign up for Site 1 and Site 2 membership at once.</p>
+                                                <button type='button' class='btn btn-primary'>Next Step</button>
+                                            </div>
+                                            <script>
+                                            document.querySelector('button').addEventListener('click', function () {
+                                                window.parent.postMessage({ step: 1, status: 'success' }, '*');
+                                            });
+                                            </script>
+                                        </body>
+                                    </html>
+                                    "></iframe>
+                                </div>
+                            </div><!-- .card -->
+                        </div><!-- .card-wrapper -->
+                    </div>
+                </div>
+                <div class="entry-footer"></div>
+            </article>
+        </main><!-- #primary -->
+        <aside id="secondary" class="sidebar sidebar-1">
+            <p style="white-space: pre-line;">Cras vitae ipsum euismod, ullamcorper est at, placerat nibh. Aliquam vitae orci in felis pretium molestie ullamcorper eget ipsum.
+
+                Vivamus ut porttitor diam. Vestibulum eu nisi sodales, mollis est in, aliquet est. Fusce sapien orci, faucibus in facilisis eget, dignissim faucibus lacus. Nulla facilisi. 
+                
+                Phasellus a dolor magna. Nulla imperdiet mauris purus, eu fermentum turpis efficitur et. Donec quis rutrum mi. 
+            </p>
+        </aside>
+    </div><!-- #content -->
+    <footer id="colophon" class="site-footer"></footer>
+</div><!-- #page -->
+<script src="./assets/vendor/bootstrap-5.2.3/js/bootstrap.min.js"></script>
+<script src="./assets/vendor/js-post-iframe-1.0.2/post-iframe.min.js"></script>
+<script src="./assets/js/all-signup.js"></script>
+</body>
+</html>

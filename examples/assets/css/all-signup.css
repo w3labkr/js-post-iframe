@@ -1,0 +1,103 @@
+:root {
+  scroll-behavior: auto;
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.site-header {
+}
+.site-footer {
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+}
+.main {
+}
+
+.sidebar {
+}
+.sidebar-1 {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 20rem;
+  white-space: pre-line;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.hentry {
+}
+.entry-header {
+}
+.entry-title {
+}
+.entry-description {
+  display: none;
+  white-space: pre-line;
+}
+.entry-content {
+}
+.entry-footer {
+}
+
+.card-wrapper .card {
+}
+.card-wrapper .card-header {
+  padding: 0;
+}
+.card-wrapper .card-body {
+}
+.card-wrapper .card-body.step-1 {
+  height: 320px;
+}
+.card-wrapper .card-body.step-2 {
+  height: 890px;
+}
+.card-wrapper .card-body.step-3 {
+  height: 550px;
+}
+.card-wrapper .card-body.step-4 {
+  height: 320px;
+}
+
+.step-nav {
+}
+.step-nav-item {
+  padding: 0.5rem 1rem;
+}
+.step-nav-item.active {
+  color: #0d6efd;
+}
+.step-nav-item.complete {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+@media (max-width: 1280px) {
+  .site {
+    height: auto;
+  }
+  .sidebar-1 {
+    display: none;
+  }
+
+  .entry-description {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .site {
+    padding-top: 2rem;
+  }
+}

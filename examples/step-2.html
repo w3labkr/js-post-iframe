@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEP 2</title>
+    <link rel="stylesheet" href="./assets/vendor/bootstrap-5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<div id="page" class="site">
+    <header id="masthead" class="site-header">
+        <nav class="site-nav">
+            <ul>
+                <li><a href="javascript:void(0);">Menu 1</a></li>
+                <li><a href="javascript:void(0);">Menu 2</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="content">
+        <main id="primary" class="main">
+            <h1>STEP 2</h1>
+            <form id="myForm">
+                <div class="mb-3">
+                    <label for="exampleInput1" class="form-label">Field 1</label>
+                    <input type="text" class="form-control" id="exampleInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput2" class="form-label">Field 2</label>
+                    <input type="text" class="form-control" id="exampleInput2">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput3" class="form-label">Field 3</label>
+                    <input type="text" class="form-control" id="exampleInput3">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput4" class="form-label">Field 4</label>
+                    <input type="text" class="form-control" id="exampleInput4">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput5" class="form-label">Field 5</label>
+                    <input type="text" class="form-control" id="exampleInput5">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput6" class="form-label">Field 6</label>
+                    <input type="text" class="form-control" id="exampleInput6">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput7" class="form-label">Field 7</label>
+                    <input type="text" class="form-control" id="exampleInput7">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput8" class="form-label">Field 8</label>
+                    <input type="text" class="form-control" id="exampleInput8">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInput9" class="form-label">Field 9</label>
+                    <input type="text" class="form-control" id="exampleInput9">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </main><!-- #primary -->
+    </div><!-- #content -->
+    <footer id="colophon" class="site-footer"></footer>
+</div><!-- #page -->
+
+<!-- scripts -->
+<script src="./assets/vendor/bootstrap-5.2.3/js/bootstrap.min.js"></script>
+<script>
+document.getElementById('myForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.parent.postMessage({ step: 2, status: 'success' }, window.location.origin);
+});
+</script>
+</body>
+</html>

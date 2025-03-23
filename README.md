@@ -10,6 +10,8 @@ Load dynamic content using `src` or `srcdoc`, automatically send a `postMessage`
 - Load iframe via `src` or `srcdoc`
 - Secure sandboxing support
 - Automatically send a `postMessage` to the iframe after load
+- Execute an `onStart` callback right when initialization begins
+- Callback on completion renamed to `onComplete` for clarity
 - Prevent duplicate instances on the same iframe element
 - Easily refresh the iframe content by creating a new instance
 
@@ -30,14 +32,17 @@ Include the script directly in your HTML:
 ### 🔹 Load iframe with `src`
 
 ```html
-<iframe id="my-frame" style="width:100%; height:300px;"></iframe>
+<iframe id="myFrame" style="width:100%; height:300px;"></iframe>
 
 <script>
   new PostIframe({
-    element: document.getElementById('my-frame'),
+    element: document.getElementById('myFrame'),
     src: 'https://example.com',
     postMessageMessage: { type: 'hello', value: 'world' },
-    onLoaded: function(frame) {
+    onStart: function(frame) {
+      console.log('Iframe initialization started!', frame);
+    },
+    onComplete: function(frame) {
       console.log('Iframe loaded!', frame);
     }
   });
@@ -55,6 +60,12 @@ Include the script directly in your HTML:
   new PostIframe({
     selector: '#doc-frame',
     srcdoc: '<h1>Hello from srcdoc!</h1>',
+    onStart: function(frame) {
+      console.log('Iframe initialization started!', frame);
+    },
+    onComplete: function(frame) {
+      console.log('Iframe loaded!', frame);
+    }
   });
 </script>
 ```
@@ -68,13 +79,13 @@ Since PostIframe prevents duplicate instances on the same element, simply create
 ```js
 // Initially load the iframe
 new PostIframe({
-  selector: '#my-frame',
+  selector: '#myFrame',
   src: 'https://old-url.com'
 });
 
 // Later, refresh the iframe with a new URL by creating a new instance
 new PostIframe({
-  selector: '#my-frame',
+  selector: '#myFrame',
   src: 'https://new-url.com'
 });
 ```
@@ -87,7 +98,7 @@ new PostIframe({
 
 ```js
 new PostIframe({
-  selector: '#my-frame',
+  selector: '#myFrame',
   src: 'child.html',
   postMessageMessage: { type: 'greeting', message: 'Hello from parent!' }
 });
@@ -167,7 +178,8 @@ window.addEventListener('message', function(event) {
 | `src`                     | `string`      | `undefined`                                                             | URL to load in the iframe. Required if `srcdoc` is not provided. |
 | `srcdoc`                  | `string`      | `''` (empty string)                                                     | Inline HTML to embed directly into the iframe. |
 | `sandbox`                 | `string`      | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. |
-| `onLoaded`                | `function`    | `null`                                                                  | Callback triggered after the iframe is loaded. |
+| `onStart`                 | `function`    | `null`                                                                  | Callback triggered immediately before iframe initialization starts. |
+| `onComplete`              | `function`    | `null`                                                                  | Callback triggered after the iframe has loaded. |
 | `postMessageMessage`      | `object`      | `{ type: 'referrer', referrer: window.location.origin + window.location.pathname }` | Message object sent to the iframe after load. |
 | `postMessageTargetOrigin` | `string`      | `window.location.origin`                                                | Target origin for `postMessage`. |
 
@@ -176,10 +188,12 @@ window.addEventListener('message', function(event) {
 ## 🧠 How It Works
 
 1. Initialize an iframe with either `src` or `srcdoc`.
-2. When the iframe loads, PostIframe automatically sends a `postMessage` to it.
-3. Inside the iframe, you can listen for this message and respond accordingly.
-4. To refresh the iframe content, simply create a new PostIframe instance targeting the same element.
-5. Duplicate instances on the same element are prevented by design.
+2. When the iframe initialization starts, the `onStart` callback is triggered (if provided).
+3. Once the iframe loads, PostIframe automatically sends a `postMessage` to it.
+4. The `onComplete` callback is then executed after the iframe is loaded.
+5. Inside the iframe, you can listen for this message and respond accordingly.
+6. To refresh the iframe content, simply create a new PostIframe instance targeting the same element.
+7. Duplicate instances on the same element are prevented by design.
 
 ---
 

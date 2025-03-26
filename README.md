@@ -8,7 +8,7 @@ Load dynamic content using `src` or `srcdoc`, automatically send a `postMessage`
 ## 🚀 Features
 
 - Load iframe via `src` or `srcdoc`
-- Secure sandboxing support
+- Secure sandboxing support with flexible options
 - Automatically send a `postMessage` to the iframe after load
 - Execute an `onStart` callback right when initialization begins
 - Callback on completion renamed to `onComplete` for clarity
@@ -128,7 +128,6 @@ You can handle communication in multiple ways:
 <script>
   window.addEventListener('message', function(event) {
     console.log('Received from parent:', event.data);
-
     // Respond back
     event.source.postMessage(
       { type: 'auto-reply', message: 'Hello from iframe!' },
@@ -179,7 +178,7 @@ Here’s how to allow multiple trusted domains when listening for messages:
 window.addEventListener('message', function (event) {
   const allowedOrigins = ['http://127.0.0.1:5500'];
   if (!allowedOrigins.includes(event.origin)) return;
-  // ...
+  // Handle the message...
 });
 ```
 
@@ -195,7 +194,7 @@ window.addEventListener('message', function (event) {
 | `selector`                | `string`      | `undefined`                                                             | CSS selector to find the iframe. Alternative to `element`. |
 | `src`                     | `string`      | `undefined`                                                             | URL to load in the iframe. Required if `srcdoc` is not provided. |
 | `srcdoc`                  | `string`      | `''` (empty string)                                                     | Inline HTML to embed directly into the iframe. |
-| `sandbox`                 | `string`      | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. |
+| `sandbox`                 | `string`      | `'allow-forms allow-scripts allow-same-origin'`                         | Sandbox attribute for iframe security. Use `'*'` to completely remove the sandbox restrictions. |
 | `onStart`                 | `function`    | `null`                                                                  | Callback triggered immediately before iframe initialization starts. |
 | `onComplete`              | `function`    | `null`                                                                  | Callback triggered after the iframe has loaded. |
 | `postMessageMessage`      | `object`      | `{ type: 'referrer', referrer: window.location.origin + window.location.pathname }` | Message object sent to the iframe after load. |
@@ -205,13 +204,14 @@ window.addEventListener('message', function (event) {
 
 ## 🧠 How It Works
 
-1. Initialize an iframe with either `src` or `srcdoc`.
-2. When the iframe initialization starts, the `onStart` callback is triggered (if provided).
-3. Once the iframe loads, PostIframe automatically sends a `postMessage` to it.
-4. The `onComplete` callback is then executed after the iframe is loaded.
-5. Inside the iframe, you can listen for this message and respond accordingly.
-6. To refresh the iframe content, simply create a new PostIframe instance targeting the same element.
-7. Duplicate instances on the same element are prevented by design.
+1. **Initialization**: Create a PostIframe instance with either a `src` or `srcdoc`.  
+2. **Sandbox Handling**:  
+   - If a `src` is provided, the iframe’s `sandbox` attribute is set based on the provided option.  
+   - **If `sandbox` is set to `'*'`**, the sandbox attribute is completely removed, lifting all restrictions.
+3. **onStart Callback**: If provided, the `onStart` callback is executed immediately before initialization.
+4. **Iframe Load & postMessage**: Once the iframe loads, PostIframe automatically sends a `postMessage` to it, and the `onComplete` callback is executed.
+5. **Communication**: Inside the iframe, you can listen for the message and respond as needed.
+6. **Refreshing Content**: Create a new PostIframe instance targeting the same element to refresh the iframe content without duplicate instances.
 
 ---
 
